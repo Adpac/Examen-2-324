@@ -1,0 +1,17 @@
+Create database ImagenesAdel;
+use ImagenesAdel;
+
+create table imagen(
+id_imagen INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+imagen image,
+titulo nVarchar(MAX)
+);
+
+create table textura(
+cod_textura INT NOT NULL IDENTITY(1,1),
+cod_imagen int Not Null,
+colorpint Varchar(15),
+R int ,
+G int ,
+B int 
+);
