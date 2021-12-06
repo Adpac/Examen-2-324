@@ -1,0 +1,58 @@
+create database workflow;
+use workflow;
+create table flujoproceso
+(
+flujo varchar(3),
+proceso  varchar(3),
+tipo varchar(1),
+rol varchar(35), 
+procesosiguiente varchar(3),
+formulario varchar(20)
+);
+
+create table flujocondicionante
+(
+flujo varchar(3);
+proceso  varchar(3),
+Si varchar(3),
+No varchar(3)
+);
+
+INSERT INTO flujoproceso values('F1', 'P1','I', 'Consejo Facultativo', 'P2','convocatoria');
+INSERT INTO flujoproceso values('F1', 'P2','P', 'Estudiante', 'P3','pCEI');
+INSERT INTO flujoproceso values('F1', 'P3','P', 'Estudiante', 'P4','pcogobierno');
+INSERT INTO flujoproceso values('F1', 'P4','P', 'Estudiante', 'P5','psecretaria');
+INSERT INTO flujoproceso values('F1', 'P5','D', 'Estudiante', 'P6','entregadoc');
+INSERT INTO flujoproceso values('F1', 'P6','P', 'Comite electoral', 'P7','revisardoc');
+INSERT INTO flujoproceso values('F1', 'P7','C', 'Comite electoral', null ,'docenorden');
+INSERT INTO flujoproceso values('F1', 'P8','P', 'Comite electoral', 'P10' ,'notaaceptacion');
+INSERT INTO flujoproceso values('F1', 'P9','F', 'Comite electoral', null ,'notarechazo');
+INSERT INTO flujoproceso values('F1', 'P10','F', 'Comite electoral', null ,'listaaceptados');
+
+INSERT INTO flujocondicionante values('P7','P8','P9' );
+
+create table seguimiento
+(
+notramite integer,
+usuario varchar(10),
+flujo varchar(3),
+proceso varchar(3),
+fechainicio datetime,
+fechafin datetime
+);
+create TABLE usuarios
+(
+usuario varchar(10),
+contrasenia varchar(10),
+rol varchar(10)
+);
+
+insert into usuarios values('Moises','123456','CF');
+insert into usuarios values('German','123456','CE');
+insert into usuarios values('Melany','123456','E');
+insert into usuarios values('Adel','123456','E');
+
+insert into seguimiento values(100,'Moises','F1','P1','2021/10/13 10:00','2021/10/13 12:00');
+insert into seguimiento values(100,'Adel','F1','P2','2021/10/13 12:00',null);
+insert into seguimiento values(102,'Melany','F2','P1','2021/10/13 08:00','2021/10/13 10:00');
+
